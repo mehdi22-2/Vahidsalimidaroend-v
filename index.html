@@ -1,0 +1,2048 @@
+<!doctype html>
+<html lang="fa" dir="rtl" style="height: 100%;">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="مدیریت فروش">
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogItin2LPYqtmFINmF2K/bjNix24zYqiDZgdix2YjYtCDYr9in2LHZiCIsCiAgInNob3J0X25hbWUiOiAi2YXYr9uM2LHbjNiqINmB2LHZiNi0IiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjNjY3ZWVhIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1qZ2dNVEk0SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVEk0SWlCb1pXbG5hSFE5SWpFeU9DSWdabWxzYkQwaUl6WTJOMlZsWVNJdlBqeDBaWGgwSUhnOUlqWTBJaUI1UFNJM05DSWdabTl1ZEMxemFYcGxQU0kyTUNJZ1ptbHNiRDBpSTJabVptWm1aaUlnZEdWNGRDMWhibU5vYjNJOUltMXBaR1JzWlNJK/CfjIo4TDNSbGVIUStQQzkwZEhSK1BDOXpkbWMrIiwKICAgICAgInNpemVzIjogIjEyOHgxMjgiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfSwKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQ2IzZzlJakFnTUNBeE1qZ2dNVEk0SWo0OGNtVmpkQ0IzYVdSMGFEMGlNVEk0SWlCb1pXbG5hSFE5SWpFeU9DSWdabWxzYkQwaUl6WTJOMlZsWVNJdlBqeDBaWGgwSUhnOUlqWTBJaUI1UFNJM05DSWdabTl1ZEMxemFYcGxQU0kyTUNJZ1ptbHNiRDBpSTJabVptWm1aaUlnZEdWNGRDMWhibU5vYjNJOUltMXBaR1JzWlNJK/CfjIo4TDNSbGVIUStQQzkwZEhSK1BDOXpkbWMrIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+  <title>سیستم مدیریت فروش دارو</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-date@latest/dist/persian-date.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/persian-datepicker@latest/dist/js/persian-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@latest/dist/css/persian-datepicker.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-size: 14px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .input-focus:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    .fade-in {
+      animation: fadeIn 0.3s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .badge-prescribed { background: #10b981; color: white; }
+    .badge-rejected { background: #ef4444; color: white; }
+    .badge-followup { background: #f59e0b; color: white; }
+    .section-tab {
+      padding: 8px 4px;
+      background: white;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 10px;
+      transition: all 0.3s;
+      border-bottom: 3px solid transparent;
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+    }
+    .section-tab.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-bottom-color: #4c51bf;
+    }
+    .section-tab .icon {
+      font-size: 14px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .floating-btn {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      z-index: 40;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      font-size: 24px;
+    }
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .persian-date-input {
+      cursor: pointer;
+      background: white;
+    }
+    .pwt-btn-today {
+      background: #667eea !important;
+      color: white !important;
+    }
+    .pwt-btn-submit {
+      background: #10b981 !important;
+      color: white !important;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body style="height: 100%; overflow-x: hidden;">
+  <div style="min-height: 100%; display: flex; flex-direction: column; background: #f0f4f8;"><!-- Header -->
+   <header class="gradient-bg text-white shadow-xl">
+    <div class="px-4 py-3">
+     <div class="text-center mb-2">
+      <h1 class="text-lg font-bold mb-1">💊 سیستم مدیریت فروش</h1>
+      <p class="text-xs opacity-90">⚡ وحید سلیمی</p>
+     </div>
+     <div class="grid grid-cols-4 gap-1 text-xs">
+      <div class="text-center bg-white bg-opacity-20 rounded-lg px-2 py-1.5">
+       <div class="text-base font-bold" id="totalDoctors">
+        0
+       </div>
+       <div class="text-xs opacity-90">
+        پزشکان
+       </div>
+      </div>
+      <div class="text-center bg-white bg-opacity-20 rounded-lg px-2 py-1.5">
+       <div class="text-base font-bold" id="totalPharmacies">
+        0
+       </div>
+       <div class="text-xs opacity-90">
+        داروخانه
+       </div>
+      </div>
+      <div class="text-center bg-white bg-opacity-20 rounded-lg px-2 py-1.5">
+       <div class="text-base font-bold" id="totalVisits">
+        0
+       </div>
+       <div class="text-xs opacity-90">
+        ویزیت
+       </div>
+      </div>
+      <div class="text-center bg-white bg-opacity-20 rounded-lg px-2 py-1.5">
+       <div class="text-base font-bold" id="totalOrders">
+        0
+       </div>
+       <div class="text-xs opacity-90">
+        سفارش
+       </div>
+      </div>
+     </div>
+    </div>
+   </header><!-- Section Tabs -->
+   <div class="px-1 pt-2">
+    <div class="flex gap-0.5 overflow-x-auto"><button class="section-tab active" data-section="doctors"> <span class="icon">👨‍⚕️</span> <span>پزشکان</span> </button> <button class="section-tab" data-section="visits"> <span class="icon">📋</span> <span>ویزیت</span> </button> <button class="section-tab" data-section="pharmacies"> <span class="icon">🏥</span> <span>داروخانه</span> </button> <button class="section-tab" data-section="orders"> <span class="icon">📦</span> <span>سفارش</span> </button> <button class="section-tab" data-section="sales"> <span class="icon">📊</span> <span>فروش</span> </button> <button class="section-tab" data-section="backup"> <span class="icon">💾</span> <span>بکاپ</span> </button> <button class="section-tab" data-section="reports"> <span class="icon">📄</span> <span>گزارش</span> </button>
+    </div>
+   </div><!-- Main Content -->
+   <main class="flex-1 px-2 pb-20 overflow-y-auto"><!-- Doctors Section -->
+    <div id="doctorsSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3">
+     <div class="mb-3"><input type="text" id="searchDoctorInput" placeholder="🔍 جستجو..." class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div id="doctorsList" class="space-y-2"></div>
+     <div id="emptyDoctorsState" class="text-center py-10 hidden">
+      <div class="text-5xl mb-3">
+       👨‍⚕️
+      </div>
+      <h3 class="text-base font-bold text-gray-700 mb-2">هنوز پزشکی ثبت نشده</h3>
+      <p class="text-gray-500 text-xs">روی دکمه + کلیک کنید</p>
+     </div>
+    </div><!-- Visits Section -->
+    <div id="visitsSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3 hidden">
+     <div class="mb-3"><input type="text" id="searchVisitInput" placeholder="🔍 جستجو..." class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div id="visitsList" class="space-y-2"></div>
+     <div id="emptyVisitsState" class="text-center py-10 hidden">
+      <div class="text-5xl mb-3">
+       📋
+      </div>
+      <h3 class="text-base font-bold text-gray-700 mb-2">هنوز ویزیتی ثبت نشده</h3>
+      <p class="text-gray-500 text-xs">روی دکم�� + کلیک کنید</p>
+     </div>
+    </div><!-- Pharmacies Section -->
+    <div id="pharmaciesSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3 hidden">
+     <div class="mb-3"><input type="text" id="searchPharmacyInput" placeholder="🔍 جستجو..." class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div id="pharmaciesList" class="space-y-2"></div>
+     <div id="emptyPharmaciesState" class="text-center py-10 hidden">
+      <div class="text-5xl mb-3">
+       🏥
+      </div>
+      <h3 class="text-base font-bold text-gray-700 mb-2">هنوز داروخانه‌ای ثبت نشده</h3>
+      <p class="text-gray-500 text-xs">روی دکمه + کلیک کنید</p>
+     </div>
+    </div><!-- Orders Section -->
+    <div id="ordersSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3 hidden">
+     <div class="mb-3"><input type="text" id="searchOrderInput" placeholder="🔍 جستجو..." class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div id="ordersList" class="space-y-2"></div>
+     <div id="emptyOrdersState" class="text-center py-10 hidden">
+      <div class="text-5xl mb-3">
+       📦
+      </div>
+      <h3 class="text-base font-bold text-gray-700 mb-2">هنوز سفارشی ثبت نشده</h3>
+      <p class="text-gray-500 text-xs">روی دکمه + کلیک کنید</p>
+     </div>
+    </div><!-- Sales Section -->
+    <div id="salesSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3 hidden">
+     <div class="mb-3"><button id="addSalesBtn" class="w-full gradient-bg text-white px-4 py-3 rounded-lg font-bold shadow text-sm"> ➕ ثبت آمار فروش هفتگی </button>
+     </div>
+     <div class="bg-white rounded-lg shadow p-3 mb-3">
+      <canvas id="salesChart" style="max-height: 250px;"></canvas>
+     </div>
+     <div id="salesList" class="space-y-2"></div>
+     <div id="emptySalesState" class="text-center py-10 hidden">
+      <div class="text-5xl mb-3">
+       📊
+      </div>
+      <h3 class="text-base font-bold text-gray-700 mb-2">هنوز آماری ثبت نشده</h3>
+      <p class="text-gray-500 text-xs">روی دکمه بالا کلیک کنید</p>
+     </div>
+    </div><!-- Reports Section -->
+    <div id="reportsSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3 hidden">
+     <div class="space-y-3">
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 border-2 border-blue-200">
+       <h3 class="font-bold text-sm mb-2 text-blue-900">📄 گزارش ارائه</h3>
+       <div class="space-y-2"><select id="reportType" class="input-focus w-full px-3 py-2 border-2 border-gray-300 rounded-lg text-xs"> <option value="doctors">پزشکان</option> <option value="pharmacies">داروخانه‌ها</option> <option value="both">هر دو</option> </select> <select id="reportPeriod" class="input-focus w-full px-3 py-2 border-2 border-gray-300 rounded-lg text-xs"> <option value="weekly">هفتگی</option> <option value="monthly">ماهانه</option> <option value="custom">سفارشی</option> </select>
+        <div class="grid grid-cols-2 gap-2"><input type="text" id="reportFromDate" readonly class="persian-date-input input-focus w-full px-2 py-2 border-2 border-gray-300 rounded text-xs" placeholder="از تاریخ"> <input type="text" id="reportToDate" readonly class="persian-date-input input-focus w-full px-2 py-2 border-2 border-gray-300 rounded text-xs" placeholder="تا تاریخ">
+        </div><button id="generatePDFBtn" class="w-full bg-red-600 text-white px-4 py-2.5 rounded-lg font-bold text-xs shadow"> 📑 تولید PDF </button>
+       </div>
+      </div>
+     </div>
+    </div><!-- Backup Section -->
+    <div id="backupSection" class="bg-white rounded-b-xl rounded-tr-xl shadow-lg p-3 hidden">
+     <div class="space-y-3"><!-- Backup Data -->
+      <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-300">
+       <h3 class="font-bold text-sm mb-3 text-green-900 flex items-center gap-2">💾 دریافت پشتیبان (بکاپ)</h3>
+       <p class="text-xs text-gray-600 mb-3 leading-relaxed">📥 با دانلود فایل بکاپ، تمام اطلاعات شما (پزشکان، ویزیت‌ها، داروخانه‌ها، سفارش‌ها و فروش) در یک فایل JSON ذخیره می‌شود.</p><button id="downloadBackupBtn" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-3 rounded-lg font-bold text-sm shadow-lg flex items-center justify-center gap-2"> 📥 دانلود فایل بکاپ </button>
+       <div class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <p class="text-xs text-blue-800 font-semibold mb-2">📍 مسیر ذخیره فایل:</p>
+        <ul class="text-xs text-blue-700 space-y-1 mr-4">
+         <li class="flex items-start gap-2"><span>🤖</span> <span><strong>اندروید:</strong> Downloads / دانلودها</span></li>
+         <li class="flex items-start gap-2"><span>🍎</span> <span><strong>آیفون:</strong> Files &gt; Downloads</span></li>
+         <li class="flex items-start gap-2"><span>💻</span> <span><strong>کامپیوتر:</strong> پوشه Downloads</span></li>
+        </ul>
+        <p class="text-xs text-blue-600 mt-2 font-semibold">📌 نام فایل: <span class="font-mono bg-white px-2 py-1 rounded">pharma-backup-[تاریخ].json</span></p>
+       </div>
+      </div><!-- Restore Data -->
+      <div class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-lg p-4 border-2 border-orange-300">
+       <h3 class="font-bold text-sm mb-3 text-orange-900 flex items-center gap-2">♻️ بازیابی اطلاعات از بکاپ</h3>
+       <p class="text-xs text-gray-600 mb-3 leading-relaxed">📤 با انتخاب فایل بکاپ قبلی، تمام اطلاعات شما بازگردانی می‌شود.</p>
+       <div class="bg-red-50 border border-red-300 rounded-lg p-3 mb-3">
+        <p class="text-xs text-red-700 font-bold flex items-center gap-2">⚠️ هشدار مهم!</p>
+        <p class="text-xs text-red-600 mt-1">با بازیابی بکاپ، تمام اطلاعات فعلی پاک شده و جایگزین داده‌های فایل بکاپ می‌شود!</p>
+       </div><input type="file" id="restoreFileInput" accept=".json" class="hidden"> <button id="restoreBackupBtn" class="w-full bg-gradient-to-r from-orange-500 to-amber-600 text-white px-4 py-3 rounded-lg font-bold text-sm shadow-lg flex items-center justify-center gap-2"> 📤 انتخاب فایل بکاپ و بازیابی </button>
+      </div><!-- Statistics -->
+      <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-4 border-2 border-purple-300">
+       <h3 class="font-bold text-sm mb-3 text-purple-900">📊 آمار داده‌های ذخیره شده</h3>
+       <div class="grid grid-cols-2 gap-2">
+        <div class="bg-white rounded-lg p-3 text-center border border-purple-200">
+         <div class="text-2xl font-bold text-purple-600" id="backupDoctorsCount">
+          0
+         </div>
+         <div class="text-xs text-gray-600 mt-1">
+          👨‍⚕️ پزشکان
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-3 text-center border border-purple-200">
+         <div class="text-2xl font-bold text-purple-600" id="backupVisitsCount">
+          0
+         </div>
+         <div class="text-xs text-gray-600 mt-1">
+          📋 ویزیت‌ها
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-3 text-center border border-purple-200">
+         <div class="text-2xl font-bold text-purple-600" id="backupPharmaciesCount">
+          0
+         </div>
+         <div class="text-xs text-gray-600 mt-1">
+          🏥 داروخانه
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-3 text-center border border-purple-200">
+         <div class="text-2xl font-bold text-purple-600" id="backupOrdersCount">
+          0
+         </div>
+         <div class="text-xs text-gray-600 mt-1">
+          📦 سفارش‌ها
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- Floating Button --> <button id="floatingBtn" class="floating-btn gradient-bg text-white">➕</button> <!-- Install Button (Always Visible) --> <button id="permanentInstallBtn" class="fixed bottom-20 right-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-3 rounded-full shadow-2xl z-40 font-bold text-xs flex items-center gap-2 pulse"> 📱 نصب اپلیکیشن </button>
+   </main><!-- Footer -->
+   <footer class="bg-white border-t border-gray-200 py-2 text-center">
+    <p class="text-xs font-semibold text-gray-600">© 2024 | <span class="text-indigo-600">⭐ وحید سلیمی</span></p>
+   </footer>
+  </div><!-- Doctor Modal -->
+  <div id="doctorModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-end z-50" style="display: none;">
+   <div class="bg-white w-full h-full overflow-y-auto fade-in">
+    <div class="gradient-bg text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+     <h2 id="doctorModalTitle" class="text-base font-bold">➕ ثبت پزشک</h2><button id="closeDoctorModal" class="text-xl">✖️</button>
+    </div>
+    <form id="doctorForm" class="p-4 space-y-3">
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">نام و نام خانوادگی *</label> <input type="text" id="doctorNameInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">تخصص *</label> <input type="text" id="specialtyInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">شماره تماس *</label> <input type="tel" id="phoneInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">منطقه *</label> <input type="text" id="areaInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">آدرس</label> <input type="text" id="addressInput" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+      <div class="grid grid-cols-2 gap-2 mt-2"><button type="button" id="getDoctorLocationBtn" class="bg-blue-500 text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1"> 📍 GPS خودکار </button> <button type="button" id="openDoctorMapBtn" class="bg-green-500 text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1"> 🗺️ باز کردن نقشه </button>
+      </div><input type="hidden" id="doctorLatitude"> <input type="hidden" id="doctorLongitude">
+      <div id="doctorLocationStatus" class="mt-2 text-xs text-center hidden"></div>
+      <div id="doctorManualLocationDiv" class="hidden mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-300">
+       <p class="text-xs text-yellow-800 font-semibold mb-2">📝 یا ورود دستی موقعیت:</p>
+       <div class="space-y-2"><input type="number" step="any" id="manualDoctorLat" placeholder="عرض جغرافیایی (مثال: 35.6892)" class="w-full px-2 py-1.5 border border-yellow-400 rounded text-xs"> <input type="number" step="any" id="manualDoctorLng" placeholder="طول جغرافیایی (مثال: 51.3890)" class="w-full px-2 py-1.5 border border-yellow-400 rounded text-xs"> <button type="button" id="saveManualDoctorLocation" class="w-full bg-yellow-600 text-white px-3 py-2 rounded-lg text-xs font-bold">💾 ذخیره موقعیت دستی</button>
+       </div>
+      </div>
+     </div>
+     <div class="flex gap-2 pt-4"><button type="submit" class="flex-1 gradient-bg text-white px-4 py-3 rounded-lg font-bold shadow-lg text-sm">💾 ذخیره</button> <button type="button" id="cancelDoctorBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg font-bold text-sm">✖️</button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Visit Modal -->
+  <div id="visitModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-end z-50" style="display: none;">
+   <div class="bg-white w-full h-full overflow-y-auto fade-in">
+    <div class="gradient-bg text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+     <h2 id="visitModalTitle" class="text-base font-bold">➕ ثبت ویزیت</h2><button id="closeVisitModal" class="text-xl">✖️</button>
+    </div>
+    <form id="visitForm" class="p-4 space-y-3">
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">انتخاب پزشک *</label> <select id="doctorSelect" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"> <option value="">انتخاب کنید...</option> </select>
+     </div>
+     <div class="grid grid-cols-2 gap-2">
+      <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">تاریخ *</label> <input type="text" id="visitDate" required readonly class="persian-date-input input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm" placeholder="انتخاب تاریخ">
+      </div>
+      <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">ساعت *</label> <input type="time" id="visitTime" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+      </div>
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">نتیجه *</label> <select id="visitResult" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"> <option value="">انت��اب کنید...</option> <option value="prescribed">سفارش شده</option> <option value="rejected">رد شده</option> <option value="followup">ویزیت مجدد</option> </select>
+     </div>
+     <div id="followupDateSection" class="hidden"><label class="block text-gray-700 font-semibold mb-1.5 text-xs">📅 تاریخ ویزیت بعدی *</label> <input type="text" id="followupDate" readonly class="persian-date-input input-focus w-full px-3 py-2.5 border-2 border-orange-400 rounded-lg text-sm" placeholder="انتخاب تاریخ">
+      <p class="text-xs text-orange-600 mt-1">💡 یک روز قبل به شما یادآوری می‌شود</p>
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">یادداشت</label> <textarea id="visitNotes" rows="2" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"></textarea>
+     </div>
+     <div class="flex gap-2 pt-4"><button type="submit" class="flex-1 gradient-bg text-white px-4 py-3 rounded-lg font-bold shadow-lg text-sm">💾 ذخیره</button> <button type="button" id="cancelVisitBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg font-bold text-sm">✖️</button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Pharmacy Modal -->
+  <div id="pharmacyModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-end z-50" style="display: none;">
+   <div class="bg-white w-full h-full overflow-y-auto fade-in">
+    <div class="gradient-bg text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+     <h2 id="pharmacyModalTitle" class="text-base font-bold">➕ ثبت داروخانه</h2><button id="closePharmacyModal" class="text-xl">✖️</button>
+    </div>
+    <form id="pharmacyForm" class="p-4 space-y-3">
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">نام داروخانه *</label> <input type="text" id="pharmacyNameInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">نام داروساز *</label> <input type="text" id="pharmacistNameInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">شماره تماس *</label> <input type="tel" id="pharmacyPhoneInput" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">آدرس *</label> <textarea id="pharmacyAddressInput" required rows="2" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"></textarea>
+      <div class="grid grid-cols-2 gap-2 mt-2"><button type="button" id="getPharmacyLocationBtn" class="bg-blue-500 text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1"> 📍 GPS خودکار </button> <button type="button" id="openPharmacyMapBtn" class="bg-green-500 text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1"> 🗺️ باز کردن نقشه </button>
+      </div><input type="hidden" id="pharmacyLatitude"> <input type="hidden" id="pharmacyLongitude">
+      <div id="pharmacyLocationStatus" class="mt-2 text-xs text-center hidden"></div>
+      <div id="pharmacyManualLocationDiv" class="hidden mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-300">
+       <p class="text-xs text-yellow-800 font-semibold mb-2">📝 یا ورود دستی موقعیت:</p>
+       <div class="space-y-2"><input type="number" step="any" id="manualPharmacyLat" placeholder="عرض جغرافیایی (مثال: 35.6892)" class="w-full px-2 py-1.5 border border-yellow-400 rounded text-xs"> <input type="number" step="any" id="manualPharmacyLng" placeholder="طول جغرافیایی (مثال: 51.3890)" class="w-full px-2 py-1.5 border border-yellow-400 rounded text-xs"> <button type="button" id="saveManualPharmacyLocation" class="w-full bg-yellow-600 text-white px-3 py-2 rounded-lg text-xs font-bold">💾 ذخیره موقعیت دستی</button>
+       </div>
+      </div>
+     </div>
+     <div class="flex gap-2 pt-4"><button type="submit" class="flex-1 gradient-bg text-white px-4 py-3 rounded-lg font-bold shadow-lg text-sm">💾 ذخیره</button> <button type="button" id="cancelPharmacyBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg font-bold text-sm">✖️</button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Order Modal -->
+  <div id="orderModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-end z-50" style="display: none;">
+   <div class="bg-white w-full h-full overflow-y-auto fade-in">
+    <div class="gradient-bg text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+     <h2 id="orderModalTitle" class="text-base font-bold">➕ ثبت سفارش</h2><button id="closeOrderModal" class="text-xl">✖️</button>
+    </div>
+    <form id="orderForm" class="p-4 space-y-3">
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">انتخاب داروخانه *</label> <select id="pharmacySelect" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"> <option value="">انتخاب کنید...</option> </select>
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">تاریخ سفارش *</label> <input type="text" id="orderDate" required readonly class="persian-date-input input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm" placeholder="انتخاب تاریخ">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">نام دارو *</label> <input type="text" id="drugName" required class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div class="grid grid-cols-2 gap-2">
+      <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">تعداد کارتن</label> <input type="number" id="cartonQty" min="0" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+      </div>
+      <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">تعداد عدد</label> <input type="number" id="unitQty" min="0" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+      </div>
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">یادداشت</label> <textarea id="orderNotes" rows="2" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"></textarea>
+     </div>
+     <div class="flex gap-2 pt-4"><button type="submit" class="flex-1 gradient-bg text-white px-4 py-3 rounded-lg font-bold shadow-lg text-sm">💾 ذخیره</button> <button type="button" id="cancelOrderBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg font-bold text-sm">✖️</button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Sales Modal -->
+  <div id="salesModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-end z-50" style="display: none;">
+   <div class="bg-white w-full h-full overflow-y-auto fade-in">
+    <div class="gradient-bg text-white p-4 sticky top-0 z-10 flex items-center justify-between">
+     <h2 id="salesModalTitle" class="text-base font-bold">➕ ثبت آمار فروش</h2><button id="closeSalesModal" class="text-xl">✖️</button>
+    </div>
+    <form id="salesForm" class="p-4 space-y-3">
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">هفته *</label> <input type="text" id="salesWeek" required readonly class="persian-date-input input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm" placeholder="انتخاب هفته">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">تعداد فروش *</label> <input type="number" id="salesAmount" required min="0" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm">
+     </div>
+     <div><label class="block text-gray-700 font-semibold mb-1.5 text-xs">یادداشت</label> <textarea id="salesNotes" rows="2" class="input-focus w-full px-3 py-2.5 border-2 border-gray-300 rounded-lg text-sm"></textarea>
+     </div>
+     <div class="flex gap-2 pt-4"><button type="submit" class="flex-1 gradient-bg text-white px-4 py-3 rounded-lg font-bold shadow-lg text-sm">💾 ذخیره</button> <button type="button" id="cancelSalesBtn" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg font-bold text-sm">✖️</button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <script>
+    const STORAGE_KEYS = {
+      DOCTORS: 'pharma_doctors',
+      VISITS: 'pharma_visits',
+      PHARMACIES: 'pharma_pharmacies',
+      ORDERS: 'pharma_orders',
+      SALES: 'pharma_sales',
+      INSTALL_DISMISSED: 'pharma_install_dismissed'
+    };
+
+    let doctors = [];
+    let visits = [];
+    let pharmacies = [];
+    let orders = [];
+    let sales = [];
+    let currentSection = 'doctors';
+    let editingId = null;
+    let salesChart = null;
+    let deferredPrompt = null;
+
+    // PWA Installation
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    document.getElementById('permanentInstallBtn').addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+          showToast('✅ اپلیکیشن نصب شد!', 'success');
+          document.getElementById('permanentInstallBtn').style.display = 'none';
+        }
+        
+        deferredPrompt = null;
+      } else {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        
+        if (isIOS || isSafari) {
+          showNotification(`📱 برای نصب:\n\n1. روی دکمه Share (اشتراک) بزنید\n2. گزینه "Add to Home Screen" رو انتخاب کنید`);
+        } else {
+          showNotification(`💡 برای نصب:\n\nاز منوی مرورگر (⋮) گزینه "نصب برنامه" یا "Install App" رو انتخاب کنید`);
+        }
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      showToast('🎉 اپلیکیشن با موفقیت نصب شد!', 'success');
+      document.getElementById('permanentInstallBtn').style.display = 'none';
+    });
+
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      document.getElementById('permanentInstallBtn').style.display = 'none';
+    }
+
+    // Open Map for Doctor Location
+    document.getElementById('openDoctorMapBtn').addEventListener('click', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            // باز کردن Google Maps در تب جدید
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+            window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+            
+            // ذخیره موقعیت خودکار
+            document.getElementById('doctorLatitude').value = lat;
+            document.getElementById('doctorLongitude').value = lng;
+            
+            const statusDiv = document.getElementById('doctorLocationStatus');
+            statusDiv.classList.remove('hidden');
+            statusDiv.innerHTML = `✅ <strong>نقشه باز شد و موقعیت ذخیره شد!</strong><br>📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+            
+            showToast('🗺️ نقشه باز شد!', 'success');
+          },
+          (error) => {
+            // اگر GPS کار نکرد، نقشه عمومی تهران باز می‌شود
+            const defaultLat = 35.6892;
+            const defaultLng = 51.3890;
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${defaultLat},${defaultLng}`;
+            window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+            
+            showToast('🗺️ نقشه باز شد (موقعیت پیش‌فرض)', 'success');
+            
+            // نمایش فرم دستی
+            document.getElementById('doctorManualLocationDiv').classList.remove('hidden');
+          }
+        );
+      } else {
+        // اگر GPS نداشت، نقشه تهران باز می‌شود
+        const defaultLat = 35.6892;
+        const defaultLng = 51.3890;
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${defaultLat},${defaultLng}`;
+        window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+        
+        showToast('🗺️ نقشه باز شد', 'success');
+        document.getElementById('doctorManualLocationDiv').classList.remove('hidden');
+      }
+    });
+
+    // Geolocation for Doctor
+    document.getElementById('getDoctorLocationBtn').addEventListener('click', async () => {
+      const statusDiv = document.getElementById('doctorLocationStatus');
+      const manualDiv = document.getElementById('doctorManualLocationDiv');
+      statusDiv.classList.remove('hidden');
+      
+      if (!('geolocation' in navigator)) {
+        statusDiv.innerHTML = '❌ <strong>مرورگر شما GPS ندارد!</strong>';
+        statusDiv.className = 'mt-2 text-xs text-center text-red-600 font-bold';
+        manualDiv.classList.remove('hidden');
+        return;
+      }
+
+      statusDiv.innerHTML = '📍 در حال دریافت موقعیت...<br><small>لطفاً صبر کنید</small>';
+      statusDiv.className = 'mt-2 text-xs text-center text-blue-600 font-bold';
+      
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          
+          document.getElementById('doctorLatitude').value = lat;
+          document.getElementById('doctorLongitude').value = lng;
+          
+          statusDiv.innerHTML = `✅ <strong>موقعیت ثبت شد!</strong><br>📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+          statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+          manualDiv.classList.add('hidden');
+          showToast('✅ موقعیت ثبت شد!', 'success');
+        },
+        (error) => {
+          statusDiv.innerHTML = '❌ <strong>خطا در دریافت موقعیت!</strong><br><small>لطفاً موقعیت را دستی وارد کنید</small>';
+          statusDiv.className = 'mt-2 text-xs text-center text-red-600 font-bold';
+          manualDiv.classList.remove('hidden');
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+      );
+    });
+
+    // Manual Doctor Location
+    document.getElementById('saveManualDoctorLocation').addEventListener('click', () => {
+      const lat = parseFloat(document.getElementById('manualDoctorLat').value);
+      const lng = parseFloat(document.getElementById('manualDoctorLng').value);
+      
+      if (isNaN(lat) || isNaN(lng)) {
+        showToast('❌ لطفاً موقعیت معتبر وارد کنید', 'error');
+        return;
+      }
+      
+      document.getElementById('doctorLatitude').value = lat;
+      document.getElementById('doctorLongitude').value = lng;
+      
+      const statusDiv = document.getElementById('doctorLocationStatus');
+      statusDiv.innerHTML = `✅ <strong>موقعیت ثبت شد!</strong><br>📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+      statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+      statusDiv.classList.remove('hidden');
+      
+      document.getElementById('doctorManualLocationDiv').classList.add('hidden');
+      showToast('✅ موقعیت ذخیره شد!', 'success');
+    });
+
+    // Open Map for Pharmacy Location
+    document.getElementById('openPharmacyMapBtn').addEventListener('click', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            // باز کردن Google Maps در تب جدید
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+            window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+            
+            // ذخیره موقعیت خودکار
+            document.getElementById('pharmacyLatitude').value = lat;
+            document.getElementById('pharmacyLongitude').value = lng;
+            
+            const statusDiv = document.getElementById('pharmacyLocationStatus');
+            statusDiv.classList.remove('hidden');
+            statusDiv.innerHTML = `✅ <strong>نقشه باز شد و موقعیت ذخیره شد!</strong><br>📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+            
+            showToast('🗺️ نقشه باز شد!', 'success');
+          },
+          (error) => {
+            // اگر GPS کار نکرد، نقشه عمومی تهران باز می‌شود
+            const defaultLat = 35.6892;
+            const defaultLng = 51.3890;
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${defaultLat},${defaultLng}`;
+            window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+            
+            showToast('🗺️ نقشه باز شد (موقعیت پیش‌فرض)', 'success');
+            
+            // نمایش فرم دستی
+            document.getElementById('pharmacyManualLocationDiv').classList.remove('hidden');
+          }
+        );
+      } else {
+        // اگر GPS نداشت، نقشه تهران باز می‌شود
+        const defaultLat = 35.6892;
+        const defaultLng = 51.3890;
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${defaultLat},${defaultLng}`;
+        window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+        
+        showToast('🗺️ نقشه باز شد', 'success');
+        document.getElementById('pharmacyManualLocationDiv').classList.remove('hidden');
+      }
+    });
+
+    // Geolocation for Pharmacy
+    document.getElementById('getPharmacyLocationBtn').addEventListener('click', async () => {
+      const statusDiv = document.getElementById('pharmacyLocationStatus');
+      const manualDiv = document.getElementById('pharmacyManualLocationDiv');
+      statusDiv.classList.remove('hidden');
+      
+      if (!('geolocation' in navigator)) {
+        statusDiv.innerHTML = '❌ <strong>مرورگر شما GPS ندارد!</strong>';
+        statusDiv.className = 'mt-2 text-xs text-center text-red-600 font-bold';
+        manualDiv.classList.remove('hidden');
+        return;
+      }
+
+      statusDiv.innerHTML = '📍 در حال دریافت موقعیت...<br><small>لطفاً صبر کنید</small>';
+      statusDiv.className = 'mt-2 text-xs text-center text-blue-600 font-bold';
+      
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          
+          document.getElementById('pharmacyLatitude').value = lat;
+          document.getElementById('pharmacyLongitude').value = lng;
+          
+          statusDiv.innerHTML = `✅ <strong>موقعیت ثبت شد!</strong><br>📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+          statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+          manualDiv.classList.add('hidden');
+          showToast('✅ موقعیت ثبت شد!', 'success');
+        },
+        (error) => {
+          statusDiv.innerHTML = '❌ <strong>خطا در دریافت موقعیت!</strong><br><small>لطفاً موقعیت را دستی وارد کنید</small>';
+          statusDiv.className = 'mt-2 text-xs text-center text-red-600 font-bold';
+          manualDiv.classList.remove('hidden');
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+      );
+    });
+
+    // Manual Pharmacy Location
+    document.getElementById('saveManualPharmacyLocation').addEventListener('click', () => {
+      const lat = parseFloat(document.getElementById('manualPharmacyLat').value);
+      const lng = parseFloat(document.getElementById('manualPharmacyLng').value);
+      
+      if (isNaN(lat) || isNaN(lng)) {
+        showToast('❌ لطفاً موقعیت معتبر وارد کنید', 'error');
+        return;
+      }
+      
+      document.getElementById('pharmacyLatitude').value = lat;
+      document.getElementById('pharmacyLongitude').value = lng;
+      
+      const statusDiv = document.getElementById('pharmacyLocationStatus');
+      statusDiv.innerHTML = `✅ <strong>موقعیت ثبت شد!</strong><br>📍 ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+      statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+      statusDiv.classList.remove('hidden');
+      
+      document.getElementById('pharmacyManualLocationDiv').classList.add('hidden');
+      showToast('✅ موقعیت ذخیره شد!', 'success');
+    });
+
+    function loadData() {
+      try {
+        doctors = JSON.parse(localStorage.getItem(STORAGE_KEYS.DOCTORS)) || [];
+        visits = JSON.parse(localStorage.getItem(STORAGE_KEYS.VISITS)) || [];
+        pharmacies = JSON.parse(localStorage.getItem(STORAGE_KEYS.PHARMACIES)) || [];
+        orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || [];
+        sales = JSON.parse(localStorage.getItem(STORAGE_KEYS.SALES)) || [];
+        
+        renderAll();
+        updateStats();
+        renderSalesChart();
+      } catch (error) {
+        console.error('Error loading data:', error);
+      }
+    }
+
+    function saveData(key, data) {
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+      } catch (error) {
+        showToast('❌ خطا در ذخیره', 'error');
+      }
+    }
+
+    function renderAll() {
+      renderDoctors();
+      renderVisits();
+      renderPharmacies();
+      renderOrders();
+      renderSales();
+      populateSelects();
+    }
+
+    function updateStats() {
+      document.getElementById('totalDoctors').textContent = doctors.length;
+      document.getElementById('totalPharmacies').textContent = pharmacies.length;
+      document.getElementById('totalVisits').textContent = visits.length;
+      document.getElementById('totalOrders').textContent = orders.length;
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('fa-IR');
+    }
+
+    function formatNumber(num) {
+      return new Intl.NumberFormat('fa-IR').format(num);
+    }
+
+    // Section Switching
+    document.querySelectorAll('.section-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const section = tab.dataset.section;
+        currentSection = section;
+        
+        document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        ['doctors', 'visits', 'pharmacies', 'orders', 'sales', 'reports', 'backup'].forEach(s => {
+          document.getElementById(s + 'Section').classList.add('hidden');
+        });
+        document.getElementById(section + 'Section').classList.remove('hidden');
+        
+        if (section === 'backup') {
+          updateBackupStats();
+        }
+      });
+    });
+
+    // Floating Button
+    document.getElementById('floatingBtn').addEventListener('click', () => {
+      editingId = null;
+      if (currentSection === 'doctors') {
+        document.getElementById('doctorModal').style.display = 'flex';
+      } else if (currentSection === 'visits') {
+        if (doctors.length === 0) {
+          showToast('❌ ابتدا پزشک ثبت کنید', 'error');
+          return;
+        }
+        document.getElementById('visitModal').style.display = 'flex';
+      } else if (currentSection === 'pharmacies') {
+        document.getElementById('pharmacyModal').style.display = 'flex';
+      } else if (currentSection === 'orders') {
+        if (pharmacies.length === 0) {
+          showToast('❌ ابتدا داروخانه ثبت کنید', 'error');
+          return;
+        }
+        document.getElementById('orderModal').style.display = 'flex';
+      }
+    });
+
+    // Render Doctors
+    function renderDoctors() {
+      const container = document.getElementById('doctorsList');
+      const empty = document.getElementById('emptyDoctorsState');
+      const searchTerm = document.getElementById('searchDoctorInput').value.toLowerCase();
+      
+      let filtered = doctors.filter(d => 
+        d.name.toLowerCase().includes(searchTerm) ||
+        d.specialty.toLowerCase().includes(searchTerm)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      container.innerHTML = filtered.map(d => `
+        <div class="bg-white rounded-lg shadow p-3 border-r-4 border-blue-500">
+          <div class="flex justify-between mb-2">
+            <div>
+              <h3 class="text-sm font-bold">👨‍⚕️ ${d.name}</h3>
+              <p class="text-xs text-indigo-600">🩺 ${d.specialty}</p>
+              <p class="text-xs text-green-600">📍 ${d.area}</p>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded p-2 mb-2 text-xs">
+            <p>📞 ${d.phone}</p>
+            ${d.address ? `<p>🏢 ${d.address}</p>` : ''}
+            ${d.latitude && d.longitude ? `<a href="https://www.google.com/maps?q=${d.latitude},${d.longitude}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">🗺️ مشاهده روی نقشه</a>` : ''}
+          </div>
+          <div class="flex gap-2">
+            <button onclick="editDoctor('${d.id}')" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-xs font-bold">✏️ ویرایش</button>
+            <button onclick="deleteDoctor('${d.id}')" class="flex-1 bg-red-500 text-white px-3 py-2 rounded text-xs font-bold">🗑️ حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Visits
+    function renderVisits() {
+      const container = document.getElementById('visitsList');
+      const empty = document.getElementById('emptyVisitsState');
+      const searchTerm = document.getElementById('searchVisitInput').value.toLowerCase();
+      
+      let filtered = visits.filter(v => 
+        v.doctorName.toLowerCase().includes(searchTerm)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      
+      const getBadge = (result) => {
+        const badges = {
+          prescribed: '<span class="badge badge-prescribed">💊 سفارش</span>',
+          rejected: '<span class="badge badge-rejected">❌ رد</span>',
+          followup: '<span class="badge badge-followup">🔄 مجدد</span>'
+        };
+        return badges[result] || '';
+      };
+      
+      container.innerHTML = filtered.map(v => `
+        <div class="bg-white rounded-lg shadow p-3 border-r-4 ${v.result === 'prescribed' ? 'border-green-500' : v.result === 'rejected' ? 'border-red-500' : 'border-orange-500'}">
+          <div class="flex justify-between mb-2">
+            <div>
+              <div class="flex items-center gap-1 mb-1">
+                <h3 class="text-sm font-bold">👨‍⚕️ ${v.doctorName}</h3>
+                ${getBadge(v.result)}
+              </div>
+              <p class="text-xs text-gray-600">📅 ${formatDate(v.date)} - ${v.time}</p>
+              ${v.followupDate ? `<p class="text-xs text-orange-600 font-bold mt-1">🔔 ویزیت بعدی: ${formatDate(v.followupDate)}</p>` : ''}
+            </div>
+          </div>
+          ${v.notes ? `<div class="bg-gray-50 rounded p-2 mb-2 text-xs"><p>📝 ${v.notes}</p></div>` : ''}
+          <div class="flex gap-2">
+            <button onclick="editVisit('${v.id}')" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-xs font-bold">✏️ ویرایش</button>
+            <button onclick="deleteVisit('${v.id}')" class="flex-1 bg-red-500 text-white px-3 py-2 rounded text-xs font-bold">🗑️ حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Pharmacies
+    function renderPharmacies() {
+      const container = document.getElementById('pharmaciesList');
+      const empty = document.getElementById('emptyPharmaciesState');
+      const searchTerm = document.getElementById('searchPharmacyInput').value.toLowerCase();
+      
+      let filtered = pharmacies.filter(p => 
+        p.name.toLowerCase().includes(searchTerm) ||
+        p.pharmacist.toLowerCase().includes(searchTerm)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      container.innerHTML = filtered.map(p => `
+        <div class="bg-white rounded-lg shadow p-3 border-r-4 border-green-500">
+          <div class="flex justify-between mb-2">
+            <div>
+              <h3 class="text-sm font-bold">🏥 ${p.name}</h3>
+              <p class="text-xs text-purple-600">💊 ${p.pharmacist}</p>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded p-2 mb-2 text-xs">
+            <p>📞 ${p.phone}</p>
+            <p>📍 ${p.address}</p>
+            ${p.latitude && p.longitude ? `<a href="https://www.google.com/maps?q=${p.latitude},${p.longitude}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">🗺️ مشاهده روی نقشه</a>` : ''}
+          </div>
+          <div class="flex gap-2">
+            <button onclick="editPharmacy('${p.id}')" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-xs font-bold">✏️ ویرایش</button>
+            <button onclick="deletePharmacy('${p.id}')" class="flex-1 bg-red-500 text-white px-3 py-2 rounded text-xs font-bold">🗑️ حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Orders
+    function renderOrders() {
+      const container = document.getElementById('ordersList');
+      const empty = document.getElementById('emptyOrdersState');
+      const searchTerm = document.getElementById('searchOrderInput').value.toLowerCase();
+      
+      let filtered = orders.filter(o => 
+        o.pharmacyName.toLowerCase().includes(searchTerm) ||
+        o.drug.toLowerCase().includes(searchTerm)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      container.innerHTML = filtered.map(o => `
+        <div class="bg-white rounded-lg shadow p-3 border-r-4 border-purple-500">
+          <div class="flex justify-between mb-2">
+            <div>
+              <h3 class="text-sm font-bold">🏥 ${o.pharmacyName}</h3>
+              <p class="text-xs text-blue-600">💊 ${o.drug}</p>
+              <p class="text-xs text-gray-600">📅 ${formatDate(o.date)}</p>
+            </div>
+          </div>
+          <div class="bg-gray-50 rounded p-2 mb-2 text-xs">
+            ${o.cartons > 0 ? `<p>📦 کارتن: ${formatNumber(o.cartons)}</p>` : ''}
+            ${o.units > 0 ? `<p>🔢 عدد: ${formatNumber(o.units)}</p>` : ''}
+            ${o.notes ? `<p>📝 ${o.notes}</p>` : ''}
+          </div>
+          <div class="flex gap-2">
+            <button onclick="editOrder('${o.id}')" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-xs font-bold">✏️ ویرایش</button>
+            <button onclick="deleteOrder('${o.id}')" class="flex-1 bg-red-500 text-white px-3 py-2 rounded text-xs font-bold">🗑️ حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Sales
+    function renderSales() {
+      const container = document.getElementById('salesList');
+      const empty = document.getElementById('emptySalesState');
+      
+      if (sales.length === 0) {
+        container.innerHTML = '';
+        empty.classList.remove('hidden');
+        return;
+      }
+      
+      empty.classList.add('hidden');
+      const sorted = [...sales].sort((a, b) => new Date(b.week) - new Date(a.week));
+      
+      container.innerHTML = sorted.map(s => `
+        <div class="bg-white rounded-lg shadow p-3 border-r-4 border-indigo-500">
+          <div class="flex justify-between mb-2">
+            <div>
+              <h3 class="text-sm font-bold">📊 هفته ${s.week}</h3>
+              <p class="text-base text-green-600 font-bold">${formatNumber(s.amount)} عدد فروش</p>
+            </div>
+          </div>
+          ${s.notes ? `<div class="bg-gray-50 rounded p-2 mb-2 text-xs"><p>📝 ${s.notes}</p></div>` : ''}
+          <div class="flex gap-2">
+            <button onclick="editSales('${s.id}')" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded text-xs font-bold">✏️ ویرایش</button>
+            <button onclick="deleteSales('${s.id}')" class="flex-1 bg-red-500 text-white px-3 py-2 rounded text-xs font-bold">🗑️ حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Sales Chart
+    function renderSalesChart() {
+      const ctx = document.getElementById('salesChart');
+      if (!ctx) return;
+      
+      if (salesChart) {
+        salesChart.destroy();
+      }
+      
+      const sorted = [...sales].sort((a, b) => new Date(a.week) - new Date(b.week));
+      const labels = sorted.map(s => s.week);
+      const data = sorted.map(s => s.amount);
+      
+      salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'تعداد فروش',
+            data: data,
+            borderColor: '#667eea',
+            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return formatNumber(value);
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Populate Selects
+    function populateSelects() {
+      const doctorSelect = document.getElementById('doctorSelect');
+      doctorSelect.innerHTML = '<option value="">انتخاب کنید...</option>' +
+        doctors.map(d => `<option value="${d.id}">${d.name} - ${d.specialty}</option>`).join('');
+      
+      const pharmacySelect = document.getElementById('pharmacySelect');
+      pharmacySelect.innerHTML = '<option value="">انتخاب کنید...</option>' +
+        pharmacies.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
+    }
+
+    // Modal Handlers
+    document.getElementById('closeDoctorModal').addEventListener('click', () => {
+      document.getElementById('doctorModal').style.display = 'none';
+      document.getElementById('doctorForm').reset();
+      document.getElementById('doctorLocationStatus').classList.add('hidden');
+      document.getElementById('doctorManualLocationDiv').classList.add('hidden');
+    });
+
+    document.getElementById('closeVisitModal').addEventListener('click', () => {
+      document.getElementById('visitModal').style.display = 'none';
+      document.getElementById('visitForm').reset();
+    });
+
+    document.getElementById('closePharmacyModal').addEventListener('click', () => {
+      document.getElementById('pharmacyModal').style.display = 'none';
+      document.getElementById('pharmacyForm').reset();
+      document.getElementById('pharmacyLocationStatus').classList.add('hidden');
+      document.getElementById('pharmacyManualLocationDiv').classList.add('hidden');
+    });
+
+    document.getElementById('closeOrderModal').addEventListener('click', () => {
+      document.getElementById('orderModal').style.display = 'none';
+      document.getElementById('orderForm').reset();
+    });
+
+    document.getElementById('closeSalesModal').addEventListener('click', () => {
+      document.getElementById('salesModal').style.display = 'none';
+      document.getElementById('salesForm').reset();
+    });
+
+    document.getElementById('cancelDoctorBtn').addEventListener('click', () => {
+      document.getElementById('doctorModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelVisitBtn').addEventListener('click', () => {
+      document.getElementById('visitModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelPharmacyBtn').addEventListener('click', () => {
+      document.getElementById('pharmacyModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelOrderBtn').addEventListener('click', () => {
+      document.getElementById('orderModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelSalesBtn').addEventListener('click', () => {
+      document.getElementById('salesModal').style.display = 'none';
+    });
+
+    // Form Submissions
+    document.getElementById('doctorForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const data = {
+        id: editingId || `doctor_${Date.now()}`,
+        name: document.getElementById('doctorNameInput').value.trim(),
+        specialty: document.getElementById('specialtyInput').value.trim(),
+        phone: document.getElementById('phoneInput').value.trim(),
+        area: document.getElementById('areaInput').value.trim(),
+        address: document.getElementById('addressInput').value.trim(),
+        latitude: document.getElementById('doctorLatitude').value,
+        longitude: document.getElementById('doctorLongitude').value,
+        createdAt: new Date().toISOString()
+      };
+      
+      if (editingId) {
+        const index = doctors.findIndex(d => d.id === editingId);
+        if (index !== -1) doctors[index] = data;
+      } else {
+        doctors.push(data);
+      }
+      
+      saveData(STORAGE_KEYS.DOCTORS, doctors);
+      renderAll();
+      updateStats();
+      document.getElementById('doctorModal').style.display = 'none';
+      document.getElementById('doctorForm').reset();
+      document.getElementById('doctorLocationStatus').classList.add('hidden');
+      document.getElementById('doctorManualLocationDiv').classList.add('hidden');
+      showToast('✅ ذخیره شد', 'success');
+    });
+
+    document.getElementById('visitResult').addEventListener('change', (e) => {
+      const followupSection = document.getElementById('followupDateSection');
+      const followupInput = document.getElementById('followupDate');
+      
+      if (e.target.value === 'followup') {
+        followupSection.classList.remove('hidden');
+        followupInput.required = true;
+      } else {
+        followupSection.classList.add('hidden');
+        followupInput.required = false;
+        followupInput.value = '';
+      }
+    });
+
+    document.getElementById('visitForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const doctorId = document.getElementById('doctorSelect').value;
+      const doctor = doctors.find(d => d.id === doctorId);
+      const result = document.getElementById('visitResult').value;
+      
+      const data = {
+        id: editingId || `visit_${Date.now()}`,
+        doctorId: doctorId,
+        doctorName: doctor.name,
+        date: document.getElementById('visitDate').value,
+        time: document.getElementById('visitTime').value,
+        result: result,
+        notes: document.getElementById('visitNotes').value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      
+      if (result === 'followup') {
+        data.followupDate = document.getElementById('followupDate').value;
+      }
+      
+      if (editingId) {
+        const index = visits.findIndex(v => v.id === editingId);
+        if (index !== -1) visits[index] = data;
+      } else {
+        visits.push(data);
+      }
+      
+      saveData(STORAGE_KEYS.VISITS, visits);
+      renderAll();
+      updateStats();
+      document.getElementById('visitModal').style.display = 'none';
+      document.getElementById('visitForm').reset();
+      document.getElementById('followupDateSection').classList.add('hidden');
+      showToast('✅ ذخیره شد', 'success');
+      
+      checkUpcomingFollowups();
+    });
+
+    document.getElementById('pharmacyForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const data = {
+        id: editingId || `pharmacy_${Date.now()}`,
+        name: document.getElementById('pharmacyNameInput').value.trim(),
+        pharmacist: document.getElementById('pharmacistNameInput').value.trim(),
+        phone: document.getElementById('pharmacyPhoneInput').value.trim(),
+        address: document.getElementById('pharmacyAddressInput').value.trim(),
+        latitude: document.getElementById('pharmacyLatitude').value,
+        longitude: document.getElementById('pharmacyLongitude').value,
+        createdAt: new Date().toISOString()
+      };
+      
+      if (editingId) {
+        const index = pharmacies.findIndex(p => p.id === editingId);
+        if (index !== -1) pharmacies[index] = data;
+      } else {
+        pharmacies.push(data);
+      }
+      
+      saveData(STORAGE_KEYS.PHARMACIES, pharmacies);
+      renderAll();
+      updateStats();
+      document.getElementById('pharmacyModal').style.display = 'none';
+      document.getElementById('pharmacyForm').reset();
+      document.getElementById('pharmacyLocationStatus').classList.add('hidden');
+      document.getElementById('pharmacyManualLocationDiv').classList.add('hidden');
+      showToast('✅ ذخیره شد', 'success');
+    });
+
+    document.getElementById('orderForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const pharmacyId = document.getElementById('pharmacySelect').value;
+      const pharmacy = pharmacies.find(p => p.id === pharmacyId);
+      
+      const data = {
+        id: editingId || `order_${Date.now()}`,
+        pharmacyId: pharmacyId,
+        pharmacyName: pharmacy.name,
+        date: document.getElementById('orderDate').value,
+        drug: document.getElementById('drugName').value.trim(),
+        cartons: parseInt(document.getElementById('cartonQty').value) || 0,
+        units: parseInt(document.getElementById('unitQty').value) || 0,
+        notes: document.getElementById('orderNotes').value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      
+      if (editingId) {
+        const index = orders.findIndex(o => o.id === editingId);
+        if (index !== -1) orders[index] = data;
+      } else {
+        orders.push(data);
+      }
+      
+      saveData(STORAGE_KEYS.ORDERS, orders);
+      renderAll();
+      updateStats();
+      document.getElementById('orderModal').style.display = 'none';
+      document.getElementById('orderForm').reset();
+      showToast('✅ ذخیره شد', 'success');
+    });
+
+    document.getElementById('addSalesBtn').addEventListener('click', () => {
+      editingId = null;
+      document.getElementById('salesModal').style.display = 'flex';
+    });
+
+    document.getElementById('salesForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const data = {
+        id: editingId || `sales_${Date.now()}`,
+        week: document.getElementById('salesWeek').value,
+        amount: parseFloat(document.getElementById('salesAmount').value),
+        notes: document.getElementById('salesNotes').value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      
+      if (editingId) {
+        const index = sales.findIndex(s => s.id === editingId);
+        if (index !== -1) sales[index] = data;
+      } else {
+        sales.push(data);
+      }
+      
+      saveData(STORAGE_KEYS.SALES, sales);
+      renderAll();
+      renderSalesChart();
+      document.getElementById('salesModal').style.display = 'none';
+      document.getElementById('salesForm').reset();
+      showToast('✅ ذخیره شد', 'success');
+    });
+
+    // Edit Functions
+    window.editDoctor = function(id) {
+      const item = doctors.find(d => d.id === id);
+      if (!item) return;
+      
+      editingId = id;
+      document.getElementById('doctorNameInput').value = item.name;
+      document.getElementById('specialtyInput').value = item.specialty;
+      document.getElementById('phoneInput').value = item.phone;
+      document.getElementById('areaInput').value = item.area;
+      document.getElementById('addressInput').value = item.address || '';
+      document.getElementById('doctorLatitude').value = item.latitude || '';
+      document.getElementById('doctorLongitude').value = item.longitude || '';
+      
+      if (item.latitude && item.longitude) {
+        const statusDiv = document.getElementById('doctorLocationStatus');
+        statusDiv.classList.remove('hidden');
+        statusDiv.innerHTML = `✅ موقعیت ثبت شده<br>📍 ${parseFloat(item.latitude).toFixed(6)}, ${parseFloat(item.longitude).toFixed(6)}`;
+        statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+      }
+      
+      document.getElementById('doctorModal').style.display = 'flex';
+    };
+
+    window.editVisit = function(id) {
+      const item = visits.find(v => v.id === id);
+      if (!item) return;
+      
+      editingId = id;
+      document.getElementById('doctorSelect').value = item.doctorId;
+      document.getElementById('visitDate').value = item.date;
+      document.getElementById('visitTime').value = item.time;
+      document.getElementById('visitResult').value = item.result;
+      document.getElementById('visitNotes').value = item.notes || '';
+      
+      if (item.result === 'followup' && item.followupDate) {
+        document.getElementById('followupDateSection').classList.remove('hidden');
+        document.getElementById('followupDate').value = item.followupDate;
+        document.getElementById('followupDate').required = true;
+      }
+      
+      document.getElementById('visitModal').style.display = 'flex';
+    };
+
+    function checkUpcomingFollowups() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      
+      const upcoming = visits.filter(v => {
+        if (!v.followupDate) return false;
+        const followupDate = new Date(v.followupDate);
+        followupDate.setHours(0, 0, 0, 0);
+        return followupDate.getTime() === tomorrow.getTime();
+      });
+      
+      if (upcoming.length > 0) {
+        const names = upcoming.map(v => `• ${v.doctorName}`).join('\n');
+        setTimeout(() => {
+          showNotification(`🔔 یاد��وری ویزیت!\n\nفردا ��اید ویزیت کنید:\n${names}`);
+        }, 1000);
+      }
+    }
+
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white px-6 py-4 rounded-lg shadow-2xl z-50 fade-in font-bold text-sm max-w-sm';
+      notification.style.whiteSpace = 'pre-line';
+      notification.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="flex-1">${message}</div>
+          <button onclick="this.parentElement.parentElement.remove()" class="text-white text-xl">✖️</button>
+        </div>
+      `;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.style.opacity = '0';
+          setTimeout(() => {
+            if (notification.parentElement) notification.remove();
+          }, 300);
+        }
+      }, 10000);
+    }
+
+    window.editPharmacy = function(id) {
+      const item = pharmacies.find(p => p.id === id);
+      if (!item) return;
+      
+      editingId = id;
+      document.getElementById('pharmacyNameInput').value = item.name;
+      document.getElementById('pharmacistNameInput').value = item.pharmacist;
+      document.getElementById('pharmacyPhoneInput').value = item.phone;
+      document.getElementById('pharmacyAddressInput').value = item.address;
+      document.getElementById('pharmacyLatitude').value = item.latitude || '';
+      document.getElementById('pharmacyLongitude').value = item.longitude || '';
+      
+      if (item.latitude && item.longitude) {
+        const statusDiv = document.getElementById('pharmacyLocationStatus');
+        statusDiv.classList.remove('hidden');
+        statusDiv.innerHTML = `✅ موقعیت ثبت شده<br>📍 ${parseFloat(item.latitude).toFixed(6)}, ${parseFloat(item.longitude).toFixed(6)}`;
+        statusDiv.className = 'mt-2 text-xs text-center text-green-600 font-bold';
+      }
+      
+      document.getElementById('pharmacyModal').style.display = 'flex';
+    };
+
+    window.editOrder = function(id) {
+      const item = orders.find(o => o.id === id);
+      if (!item) return;
+      
+      editingId = id;
+      document.getElementById('pharmacySelect').value = item.pharmacyId;
+      document.getElementById('orderDate').value = item.date;
+      document.getElementById('drugName').value = item.drug;
+      document.getElementById('cartonQty').value = item.cartons;
+      document.getElementById('unitQty').value = item.units;
+      document.getElementById('orderNotes').value = item.notes || '';
+      document.getElementById('orderModal').style.display = 'flex';
+    };
+
+    window.editSales = function(id) {
+      const item = sales.find(s => s.id === id);
+      if (!item) return;
+      
+      editingId = id;
+      document.getElementById('salesWeek').value = item.week;
+      document.getElementById('salesAmount').value = item.amount;
+      document.getElementById('salesNotes').value = item.notes || '';
+      document.getElementById('salesModal').style.display = 'flex';
+    };
+
+    // Delete Functions
+    window.deleteDoctor = function(id) {
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white rounded-lg p-6 mx-4 max-w-sm">
+          <h3 class="text-lg font-bold mb-3">⚠️ تأیید حذف</h3>
+          <p class="text-gray-600 mb-4">آیا مطمئن هستید؟</p>
+          <div class="flex gap-2">
+            <button id="confirmDelete" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg font-bold">حذف</button>
+            <button id="cancelDelete" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg font-bold">لغو</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      
+      document.getElementById('confirmDelete').onclick = () => {
+        doctors = doctors.filter(d => d.id !== id);
+        saveData(STORAGE_KEYS.DOCTORS, doctors);
+        renderAll();
+        updateStats();
+        showToast('✅ حذف شد', 'success');
+        overlay.remove();
+      };
+      
+      document.getElementById('cancelDelete').onclick = () => overlay.remove();
+    };
+
+    window.deleteVisit = function(id) {
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white rounded-lg p-6 mx-4 max-w-sm">
+          <h3 class="text-lg font-bold mb-3">⚠️ تأیید حذف</h3>
+          <p class="text-gray-600 mb-4">آیا مطمئن هستید؟</p>
+          <div class="flex gap-2">
+            <button id="confirmDelete" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg font-bold">حذف</button>
+            <button id="cancelDelete" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg font-bold">لغو</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      
+      document.getElementById('confirmDelete').onclick = () => {
+        visits = visits.filter(v => v.id !== id);
+        saveData(STORAGE_KEYS.VISITS, visits);
+        renderAll();
+        updateStats();
+        showToast('✅ حذف شد', 'success');
+        overlay.remove();
+      };
+      
+      document.getElementById('cancelDelete').onclick = () => overlay.remove();
+    };
+
+    window.deletePharmacy = function(id) {
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white rounded-lg p-6 mx-4 max-w-sm">
+          <h3 class="text-lg font-bold mb-3">⚠️ تأیید حذف</h3>
+          <p class="text-gray-600 mb-4">آیا مطمئن هستید؟</p>
+          <div class="flex gap-2">
+            <button id="confirmDelete" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg font-bold">حذف</button>
+            <button id="cancelDelete" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg font-bold">لغو</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      
+      document.getElementById('confirmDelete').onclick = () => {
+        pharmacies = pharmacies.filter(p => p.id !== id);
+        saveData(STORAGE_KEYS.PHARMACIES, pharmacies);
+        renderAll();
+        updateStats();
+        showToast('✅ حذف شد', 'success');
+        overlay.remove();
+      };
+      
+      document.getElementById('cancelDelete').onclick = () => overlay.remove();
+    };
+
+    window.deleteOrder = function(id) {
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white rounded-lg p-6 mx-4 max-w-sm">
+          <h3 class="text-lg font-bold mb-3">⚠️ تأیید حذف</h3>
+          <p class="text-gray-600 mb-4">آیا مطمئن هستید؟</p>
+          <div class="flex gap-2">
+            <button id="confirmDelete" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg font-bold">حذف</button>
+            <button id="cancelDelete" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg font-bold">لغو</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      
+      document.getElementById('confirmDelete').onclick = () => {
+        orders = orders.filter(o => o.id !== id);
+        saveData(STORAGE_KEYS.ORDERS, orders);
+        renderAll();
+        updateStats();
+        showToast('✅ حذف شد', 'success');
+        overlay.remove();
+      };
+      
+      document.getElementById('cancelDelete').onclick = () => overlay.remove();
+    };
+
+    window.deleteSales = function(id) {
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white rounded-lg p-6 mx-4 max-w-sm">
+          <h3 class="text-lg font-bold mb-3">⚠️ تأیید حذف</h3>
+          <p class="text-gray-600 mb-4">آیا مطمئن هستید؟</p>
+          <div class="flex gap-2">
+            <button id="confirmDelete" class="flex-1 bg-red-500 text-white px-4 py-2 rounded-lg font-bold">حذف</button>
+            <button id="cancelDelete" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg font-bold">لغو</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      
+      document.getElementById('confirmDelete').onclick = () => {
+        sales = sales.filter(s => s.id !== id);
+        saveData(STORAGE_KEYS.SALES, sales);
+        renderAll();
+        renderSalesChart();
+        showToast('✅ حذف شد', 'success');
+        overlay.remove();
+      };
+      
+      document.getElementById('cancelDelete').onclick = () => overlay.remove();
+    };
+
+    // PDF Generation
+    document.getElementById('generatePDFBtn').addEventListener('click', async () => {
+      const type = document.getElementById('reportType').value;
+      const period = document.getElementById('reportPeriod').value;
+      const fromDate = document.getElementById('reportFromDate').value;
+      const toDate = document.getElementById('reportToDate').value;
+      
+      showToast('📄 در حال تولید PDF...', 'success');
+      
+      setTimeout(() => {
+        const reportContent = generateReportHTML(type, fromDate, toDate);
+        const printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.write(reportContent);
+        printWindow.document.close();
+        printWindow.print();
+        showToast('✅ گزارش آماده است', 'success');
+      }, 500);
+    });
+
+    function generateReportHTML(type, fromDate, toDate) {
+      const fromDateFa = fromDate ? new Date(fromDate).toLocaleDateString('fa-IR') : 'نامحدود';
+      const toDateFa = toDate ? new Date(toDate).toLocaleDateString('fa-IR') : 'نامحدود';
+      const todayFa = new Date().toLocaleDateString('fa-IR');
+      
+      let content = `
+        <!DOCTYPE html>
+        <html dir="rtl">
+        <head>
+          <meta charset="UTF-8">
+          <title>گزارش مدیریتی</title>
+          <style>
+            body { 
+              font-family: 'Tahoma', sans-serif; 
+              padding: 20px;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              min-height: 100%;
+            }
+            .container {
+              background: white;
+              border-radius: 15px;
+              padding: 30px;
+              box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            }
+            .header-box {
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 30px;
+              border-radius: 10px;
+              text-align: center;
+              margin-bottom: 30px;
+              box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            }
+            .header-box h1 {
+              margin: 0 0 15px 0;
+              font-size: 32px;
+              font-weight: bold;
+            }
+            .header-box .subtitle {
+              font-size: 18px;
+              margin: 10px 0;
+              opacity: 0.95;
+            }
+            .date-range {
+              background: rgba(255,255,255,0.2);
+              padding: 15px;
+              border-radius: 8px;
+              margin-top: 15px;
+              font-size: 16px;
+            }
+            table { 
+              width: 100%; 
+              border-collapse: collapse; 
+              margin: 20px 0;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            th, td { 
+              border: 1px solid #e0e0e0; 
+              padding: 12px; 
+              text-align: right; 
+            }
+            th { 
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              font-weight: bold;
+            }
+            tbody tr:nth-child(even) {
+              background: #f8f9ff;
+            }
+            tbody tr:hover {
+              background: #e8ebff;
+            }
+            h2 {
+              color: #667eea;
+              border-right: 5px solid #667eea;
+              padding-right: 15px;
+              margin-top: 30px;
+            }
+            .footer {
+              margin-top: 50px;
+              padding-top: 20px;
+              border-top: 3px solid #667eea;
+              text-align: center;
+            }
+            .footer .signature {
+              font-size: 18px;
+              color: #333;
+              margin-top: 10px;
+            }
+            .footer .name {
+              font-weight: bold;
+              color: #667eea;
+              font-size: 20px;
+            }
+            .stats-box {
+              display: flex;
+              justify-content: space-around;
+              margin: 20px 0;
+              gap: 15px;
+            }
+            .stat-item {
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              color: white;
+              padding: 20px;
+              border-radius: 10px;
+              text-align: center;
+              flex: 1;
+              box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+            }
+            .stat-item .number {
+              font-size: 28px;
+              font-weight: bold;
+              margin-bottom: 5px;
+            }
+            .stat-item .label {
+              font-size: 14px;
+              opacity: 0.9;
+            }
+            @media print {
+              body { background: white; }
+              .container { box-shadow: none; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header-box">
+              <h1>📊 گزارش مدیریتی</h1>
+              <div class="subtitle">سیستم مدیریت فروش دارو</div>
+              <div class="date-range">
+                <strong>بازه زمانی:</strong> ${fromDateFa} تا ${toDateFa}
+                <br>
+                <strong>تاریخ تهیه گزارش:</strong> ${todayFa}
+              </div>
+            </div>
+            
+            <div class="stats-box">
+              <div class="stat-item">
+                <div class="number">${doctors.length}</div>
+                <div class="label">تعداد پزشکان</div>
+              </div>
+              <div class="stat-item">
+                <div class="number">${pharmacies.length}</div>
+                <div class="label">تعداد داروخانه</div>
+              </div>
+              <div class="stat-item">
+                <div class="number">${visits.length}</div>
+                <div class="label">تعداد ویزیت</div>
+              </div>
+              <div class="stat-item">
+                <div class="number">${orders.length}</div>
+                <div class="label">تعداد سفارش</div>
+              </div>
+            </div>
+      `;
+      
+      if (type === 'doctors' || type === 'both') {
+        let filtered = doctors;
+        if (fromDate) filtered = filtered.filter(d => d.createdAt >= fromDate);
+        if (toDate) filtered = filtered.filter(d => d.createdAt <= toDate);
+        
+        content += `
+          <h2>پزشکان (${filtered.length} نفر)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ردیف</th>
+                <th>نام</th>
+                <th>تخصص</th>
+                <th>تماس</th>
+                <th>منطقه</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtered.map((d, i) => `
+                <tr>
+                  <td>${i + 1}</td>
+                  <td>${d.name}</td>
+                  <td>${d.specialty}</td>
+                  <td>${d.phone}</td>
+                  <td>${d.area}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+      
+      if (type === 'pharmacies' || type === 'both') {
+        let filtered = pharmacies;
+        if (fromDate) filtered = filtered.filter(p => p.createdAt >= fromDate);
+        if (toDate) filtered = filtered.filter(p => p.createdAt <= toDate);
+        
+        content += `
+          <h2>داروخانه‌ها (${filtered.length} مورد)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ردیف</th>
+                <th>نام داروخانه</th>
+                <th>داروساز</th>
+                <th>تماس</th>
+                <th>آدرس</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtered.map((p, i) => `
+                <tr>
+                  <td>${i + 1}</td>
+                  <td>${p.name}</td>
+                  <td>${p.pharmacist}</td>
+                  <td>${p.phone}</td>
+                  <td>${p.address}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        `;
+      }
+      
+      content += `
+            <div class="footer">
+              <div class="signature">تهیه و تنظیم کننده</div>
+              <div class="name">⭐ وحید سلیمی</div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+      
+      return content;
+    }
+
+    // Search Handlers
+    document.getElementById('searchDoctorInput').addEventListener('input', renderDoctors);
+    document.getElementById('searchVisitInput').addEventListener('input', renderVisits);
+    document.getElementById('searchPharmacyInput').addEventListener('input', renderPharmacies);
+    document.getElementById('searchOrderInput').addEventListener('input', renderOrders);
+
+    // Toast
+    function showToast(message, type = 'success') {
+      const toast = document.createElement('div');
+      const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+      toast.className = `fixed top-4 left-1/2 transform -translate-x-1/2 ${bgColor} text-white px-6 py-3 rounded-lg shadow-2xl z-50 fade-in font-bold text-sm`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => document.body.removeChild(toast), 300);
+      }, 2500);
+    }
+
+    // Initialize Persian Date Pickers
+    function initPersianDatePickers() {
+      if (typeof $) {
+        $('#visitDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          initialValue: true,
+          autoClose: true,
+          observer: true,
+          altField: '#visitDate',
+          altFormat: 'YYYY-MM-DD',
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          }
+        });
+
+        $('#followupDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          autoClose: true,
+          observer: true,
+          altField: '#followupDate',
+          altFormat: 'YYYY-MM-DD',
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          }
+        });
+
+        $('#orderDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          initialValue: true,
+          autoClose: true,
+          observer: true,
+          altField: '#orderDate',
+          altFormat: 'YYYY-MM-DD',
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          }
+        });
+
+        $('#salesWeek').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          initialValue: true,
+          autoClose: true,
+          observer: true,
+          altField: '#salesWeek',
+          altFormat: 'YYYY-MM-DD',
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          }
+        });
+
+        $('#reportFromDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          autoClose: true,
+          observer: true,
+          altField: '#reportFromDate',
+          altFormat: 'YYYY-MM-DD',
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          }
+        });
+
+        $('#reportToDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          autoClose: true,
+          observer: true,
+          altField: '#reportToDate',
+          altFormat: 'YYYY-MM-DD',
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          }
+        });
+      }
+    }
+
+    // Backup Functions
+    function updateBackupStats() {
+      document.getElementById('backupDoctorsCount').textContent = doctors.length;
+      document.getElementById('backupVisitsCount').textContent = visits.length;
+      document.getElementById('backupPharmaciesCount').textContent = pharmacies.length;
+      document.getElementById('backupOrdersCount').textContent = orders.length;
+    }
+
+    // Download Backup
+    document.getElementById('downloadBackupBtn').addEventListener('click', () => {
+      const backupData = {
+        version: '1.0',
+        timestamp: new Date().toISOString(),
+        data: {
+          doctors: doctors,
+          visits: visits,
+          pharmacies: pharmacies,
+          orders: orders,
+          sales: sales
+        }
+      };
+      
+      const jsonString = JSON.stringify(backupData, null, 2);
+      const blob = new Blob([jsonString], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      const date = new Date().toISOString().split('T')[0];
+      link.download = `pharma-backup-${date}.json`;
+      link.href = url;
+      link.click();
+      
+      URL.revokeObjectURL(url);
+      showToast('✅ فایل بکاپ دانلود شد!', 'success');
+    });
+
+    // Restore Backup
+    document.getElementById('restoreBackupBtn').addEventListener('click', () => {
+      document.getElementById('restoreFileInput').click();
+    });
+
+    document.getElementById('restoreFileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const overlay = document.createElement('div');
+      overlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      overlay.innerHTML = `
+        <div class="bg-white rounded-lg p-6 mx-4 max-w-sm">
+          <h3 class="text-lg font-bold mb-3 text-orange-600">⚠️ تأیید بازیابی</h3>
+          <p class="text-gray-700 mb-2 text-sm">آیا مطمئن هستید؟</p>
+          <p class="text-red-600 text-xs mb-4 font-semibold">تمام اطلاعات فعلی پاک می‌شود!</p>
+          <div class="flex gap-2">
+            <button id="confirmRestore" class="flex-1 bg-orange-500 text-white px-4 py-2 rounded-lg font-bold text-sm">بازیابی</button>
+            <button id="cancelRestore" class="flex-1 bg-gray-300 px-4 py-2 rounded-lg font-bold text-sm">لغو</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      
+      document.getElementById('confirmRestore').onclick = () => {
+        const reader = new FileReader();
+        
+        reader.onload = (event) => {
+          try {
+            const backupData = JSON.parse(event.target.result);
+            
+            if (!backupData.data || !backupData.data.doctors) {
+              showToast('❌ فایل بکاپ نامعتبر است', 'error');
+              overlay.remove();
+              return;
+            }
+            
+            doctors = backupData.data.doctors || [];
+            visits = backupData.data.visits || [];
+            pharmacies = backupData.data.pharmacies || [];
+            orders = backupData.data.orders || [];
+            sales = backupData.data.sales || [];
+            
+            saveData(STORAGE_KEYS.DOCTORS, doctors);
+            saveData(STORAGE_KEYS.VISITS, visits);
+            saveData(STORAGE_KEYS.PHARMACIES, pharmacies);
+            saveData(STORAGE_KEYS.ORDERS, orders);
+            saveData(STORAGE_KEYS.SALES, sales);
+            
+            renderAll();
+            updateStats();
+            renderSalesChart();
+            updateBackupStats();
+            
+            showToast('✅ بازیابی با موفقیت انجام شد!', 'success');
+            overlay.remove();
+            
+            document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-section="doctors"]').classList.add('active');
+            ['visits', 'pharmacies', 'orders', 'sales', 'reports', 'backup'].forEach(s => {
+              document.getElementById(s + 'Section').classList.add('hidden');
+            });
+            document.getElementById('doctorsSection').classList.remove('hidden');
+            currentSection = 'doctors';
+            
+          } catch (error) {
+            showToast('❌ خطا در خواندن فایل', 'error');
+            overlay.remove();
+          }
+        };
+        
+        reader.readAsText(file);
+      };
+      
+      document.getElementById('cancelRestore').onclick = () => {
+        overlay.remove();
+        e.target.value = '';
+      };
+    });
+
+    // Initialize
+    loadData();
+    
+    const checkJQuery = setInterval(() => {
+      if (typeof $ !== 'undefined') {
+        clearInterval(checkJQuery);
+        initPersianDatePickers();
+      }
+    }, 100);
+    
+    checkUpcomingFollowups();
+    setInterval(checkUpcomingFollowups, 3600000);
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a33c7b6c6ee5d56',t:'MTc2MzkzMzU1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
